@@ -27,7 +27,7 @@
                           <label  class="col-form-label">Search Data</label>
                         </div> --}}
                         <div class="col-auto">
-                          <input type="text"  required class="form-control" placeholder="Kata Kunci.." name="filter">
+                          <input type="text"  value="{{request('filter')}}" class="form-control" placeholder="Kata Kunci.." name="filter">
                         </div>
                         <div class="col-auto">
                           <button class="btn btn-primary" type="submit">Filter</button>
