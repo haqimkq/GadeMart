@@ -11,8 +11,6 @@ Data Pasar Kota Palu
 <div class="card shadow mt-4">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <!-- Button trigger modal -->
-
-
     </div>
     <div class="card-body">
 
@@ -26,6 +24,74 @@ Data Pasar Kota Palu
 
             @else
             @can('admin')
+
+            <div class="row">
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Total Pasar</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{$jumlahpasar}}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        Bersertifikat</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{$sertifikatada}}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                        Tidak bersertifikat</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{$sertifikattidak}}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-dark shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+                                        Total Petugas</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{$totalpetugas}}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button type="button" class="btn btn-primary mb-3" data-toggle="modal"
                 style="background-color: rgb(195, 0, 255); border:0ch" data-target=".bd-example-modal-lg">Tambah
                 Pasar</button>
@@ -41,7 +107,7 @@ Data Pasar Kota Palu
                             <th class="align-middle" rowspan="2">Nama Pasar</th>
                             <th class="align-middle" rowspan="2">Foto</th>
                             <th class="align-middle" rowspan="2">Tahun Pembangunan</th>
-                            <th class="align-middle" rowspan="2">Luas Lahan</th>
+                            <th class="align-middle" rowspan="2">Luas Lahan m²</th>
                             <th class="align-middle" colspan="2">Sertifikat</th>
                             <th class="align-middle" rowspan="2">Kecamatan</th>
                             <th class="align-middle" rowspan="2">Kelurahan</th>
@@ -140,14 +206,13 @@ Data Pasar Kota Palu
                     @endforeach
                     <tr class="text-center">
                         <th class="align-middle" colspan="4">Total</th>
-                        <th class="align-middle"></th>
+                        <th class="align-middle"><small><b>{{ number_format($luas)  }} m<sup>2</sup></b></small></th>
                         <th class="align-middle">
                             <kbd class="bg-primary">{{ $sertifikatada }}</kbd>
                         </th>
                         <th class="align-middle">
                             <kbd class="bg-secondary">{{ $sertifikattidak }}</kbd>
                         </th>
-
                         <th class="align-middle"></th>
                         <th class="align-middle"></th>
                         <th class="align-middle"></th>

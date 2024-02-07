@@ -10,10 +10,14 @@ class PasarController extends Controller
 {
     public function index()
     {
+
+        
         
         $sertifikatada = Pasar::where('sertifikat', 'Ada')->count();
         $sertifikattidak = Pasar::where('sertifikat', 'Tidak')->count();
-        
+        $luas = Pasar::sum('luas_lahan');
+        $jumlahpasar = Pasar::count('nama');
+
         $pedagang = Pasar::sum('pedagang');
         $kios_petak = Pasar::sum('kios_petak');
         $los_petak = Pasar::sum('los_petak');
@@ -27,10 +31,13 @@ class PasarController extends Controller
         $keamanan = Pasar::sum('keamanan');
         $retribusi = Pasar::sum('retribusi');
 
+        $totalpetugas = $kebersihan + $keamanan + $retribusi;
         return view('dashboard.pasar.index',[
             'pasars' => Pasar::latest()->get(),
+            'jumlahpasar' => $jumlahpasar,
             'sertifikatada' => $sertifikatada,
             'sertifikattidak' => $sertifikattidak,
+            'luas' => $luas,
             'pedagang' => $pedagang,
             'kios_petak' => $kios_petak,
             'los_petak' => $los_petak,
@@ -42,7 +49,8 @@ class PasarController extends Controller
             'kepala_pasar' => $kepala_pasar,
             'kebersihan' => $kebersihan,
             'keamanan' => $keamanan,
-            'retribusi' => $retribusi
+            'retribusi' => $retribusi,
+            'totalpetugas' => $totalpetugas
         ]);
     }
 

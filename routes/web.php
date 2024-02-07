@@ -53,6 +53,9 @@ Route::resource('/dashboard/pasar', PasarController::class)->middleware('auth');
 Route::resource('/dashboard/satuan', SatuanController::class)->middleware('admin','auth');
 Route::resource('/dashboard/buat-akun', UserController::class)->middleware('admin','auth');
 Route::get('/dashboard/aduan-masuk', [AduanController::class, 'aduan'])->middleware('auth');
+
+// balas aduan WA
+Route::post('/kirim-pesan-whatsapp', [AduanController::class, 'sendWhatsAppMessage'])->name('send.whatsapp');
 // download export excel data harga
 Route::get('/export',[PanganController::class ,'export'])->middleware('auth');
 

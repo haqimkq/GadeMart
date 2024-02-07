@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\AduanExport;
 use Alert;
+use GuzzleHttp\Client;
 use Maatwebsite\Excel\Facades\Excel;
 class AduanController extends Controller
 {
@@ -89,6 +90,13 @@ class AduanController extends Controller
             'isi_aduan' => 'required'
         ]);
 
+            // Menghapus digit pertama (0) dari nomor telepon dan menambahkan kode negara (62)
+        $nomor = $validatedData['no_hp'];
+        $nomor = substr($nomor, 1); // Menghapus digit pertama (0)
+        $nomor = '+62' . $nomor; // Menambahkan kode negara (62)
+
+        $validatedData['no_hp'] = $nomor;
+
         if($request->file('gambar')){
             $validatedData['gambar'] = $request->file('gambar')->store('aduan-image','public');
         }
@@ -152,5 +160,23 @@ class AduanController extends Controller
     
         return Excel::download(new AduanExport(), 'Aduan Masyarakat.xlsx');
         
+    }
+
+    
+    public function sendWhatsAppMessage(Request $request)
+    {
+        $pesan = $request->input('balasan');
+        $nomor = $request->input('no_hp');
+
+        
+    // Mengecek apakah nomor sudah berawalan dengan '+', jika belum, tambahkan '+'
+    if (substr($nomor, 0, 1) !== '+') {
+        $nomor = '+' . $nomor;
+    }
+        // Encode pesan agar sesuai dengan URL
+        $encodedPesan = urlencode($pesan);
+
+        // Redirect ke tautan WhatsApp dengan pesan dan nomor tujuan yang disertakan
+        return redirect("whatsapp://send?text=$encodedPesan&phone=$nomor");
     }
 }
