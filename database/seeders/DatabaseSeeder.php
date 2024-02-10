@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\Komoditas;
+use App\Models\Satuan;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
         
         $faker = Faker::create();
 
-        for ($i = 0; $i < 1000000; $i++) {
-        Komoditas::create([
-                    'nama' => $faker->name
+        for ($i = 0; $i < 100000; $i++) {
+        Satuan::create([
+                    'nama' => $faker->word
                     // Tambahkan kolom lainnya sesuai kebutuhan Anda
                 ]);
         }

@@ -246,27 +246,15 @@ class PanganController extends Controller
         if (auth()->user()->is_admin == false) {
             $pangan = Pangan::where('user_id', auth()->user()->id)->count();
         } else {
-            $pangan = Pangan::all()->count();
+            $pangan = Pangan::count(); // Menggunakan count() langsung
         }
         
-        $komoditas = Komoditas::all()->count();
+        $komoditas = Komoditas::count();
+        $user = User::count();
+        $satuan = Satuan::count();
+        $barang = Barang::count();
+        $pasar = Pasar::count();
         
-        $user = User::all()->count();
-        
-        $satuan = Satuan::all()->count();
-
-        $barang = Barang::all()->count();
-        
-        $pasar = Pasar::all()->count();
-        
-        // return view('dashboard.dashboard',[
-        //     'pangan' => $pangan,
-        //     'komoditas' => $komoditas,
-        //     'user' => $user,
-        //     'pasar' => $pasar,
-        //     'satuan' => $satuan,
-        //     'barang'
-        // ]);
 
         return view('dashboard.dashboard',compact('pangan','komoditas','user','pasar','satuan','barang'));
     }
